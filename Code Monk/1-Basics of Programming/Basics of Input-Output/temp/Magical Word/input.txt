@@ -1,0 +1,17 @@
+2
+26
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+26
+abcdefghijklmnopqrstuvwxyz
+
+
+
+
+correct
+wrong
+CCCCCGGGIIIIOOOOOSSSSSYYYY
+CCCCCGGGIIIIOOOOOSSSSSYYYY
+aaaeeegggkkkmmmqqqqqqqqqqq
+aaaeeegggkkkmmmqqqqqqqqq
+
+wrong 
