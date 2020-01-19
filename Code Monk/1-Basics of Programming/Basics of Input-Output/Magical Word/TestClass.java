@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+ 
 class ClassTest
 {
     public static Boolean isPrime(int n)
@@ -15,30 +15,16 @@ class ClassTest
         for(int i = 2 ; i <= Math.sqrt(n) ; i++) if(n % i == 0) return false;
         return true;
     }
-
-    public static int getLowerPrime(int n)
-    {
-        if(n < 67) return 67;       // special case for A,B
-        while(!isPrime(n)) n--;
-        return n;
-    }
-
-    public static int getUpperPrime(int n)
-    {
-            if(n == 90) return 98;  // special case for 'Z'
-            if(n > 113) return 113;
-            while(!isPrime(n)) n++;
-            return n;
-    }
-
+ 
     public static void main(String... args) throws Exception
     {
         int n, len, asciiValue, lowerPrime, upperPrime;
         Map<Integer, Character> nearestPrime = new HashMap<>();
         StringBuilder sb = new StringBuilder(""), ans = new StringBuilder("");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+ 
         n = Integer.parseInt(br.readLine());
+        
         while(n-- != 0)
         {
             len = Integer.parseInt(br.readLine());
@@ -48,25 +34,28 @@ class ClassTest
                 asciiValue = (int)sb.charAt(i);
                 if(!(nearestPrime.containsKey(asciiValue)))
                 {
-                    if(asciiValue < 65)  // only upperprime exists
-                        nearestPrime.put(asciiValue, 'C'); // 67  = 'C'
-                    else if(asciiValue > 122) // only lowerPrime exists
-                        nearestPrime.put(asciiValue, 'q'); // 113 = 'q'
-                    else if(asciiValue > 90 && asciiValue < 97)
+                    if(asciiValue < 67)
+                        nearestPrime.put(asciiValue, 'C');
+                    else if(asciiValue > 113)
+                        nearestPrime.put(asciiValue, 'q');
+                    else if(asciiValue >= 90 && asciiValue < 97) // including 'Z'
                     {
                         if(asciiValue - 89 <= 97 - asciiValue)
-                            nearestPrime.put(asciiValue, 'Y'); //89 = 'Y'
+                            nearestPrime.put(asciiValue, 'Y');
                         else
-                            nearestPrime.put(asciiValue, 'a'); //97 = 'a'
+                            nearestPrime.put(asciiValue, 'a');
                     }
-                    else if((asciiValue >= 65 && asciiValue <= 90) && (asciiValue >= 97 && asciiValue <= 122))
+                    else // asciiValue is in range 67 - 89(C - Y) or 97 - 113(a - q)
                     {
                         if(isPrime(asciiValue))
                             nearestPrime.put(asciiValue, (char)asciiValue);
-                        else // compute lowerPrime and upperPrime
+                        else // compute lowerPrime and upperPrime and both always exists
                         {
-                            lowerPrime = getLowerPrime(asciiValue);
-                            upperPrime = getUpperPrime(asciiValue);
+                            lowerPrime = asciiValue - 1;
+                            upperPrime = asciiValue + 1;
+                            while(!isPrime(lowerPrime))lowerPrime--;
+                            while(!isPrime(upperPrime))upperPrime++;
+ 
                             if(asciiValue - lowerPrime <= upperPrime - asciiValue)
                                 nearestPrime.put(asciiValue, (char)lowerPrime);
                             else
