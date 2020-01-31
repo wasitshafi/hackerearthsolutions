@@ -1,6 +1,6 @@
 /**
     @author  wasitshafi
-    @since   27-01-2020
+    @since   27-01-2020 
 */
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,13 +9,13 @@ class TestClass
 {
     public static void main(String... args) throws Exception
     {
-        int n;
+        short n;
         String s;
         long count = 0, len;
         StringBuilder sb = new StringBuilder("");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        n = Integer.parseInt(br.readLine());
+        n = Short.parseShort(br.readLine());
         while(n-- != 0)
         {
             count = 0;
